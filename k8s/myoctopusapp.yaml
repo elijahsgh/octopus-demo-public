@@ -22,24 +22,25 @@ spec:
         app: myoctopusapp
     spec:
       containers:
-      - name: app
-        image: nginx:1.14.2
+      - name: myoctopusapp
+        image: ghcr.io/elijahsgh/octopusdemoapppublic:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8000
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: octopusdemo-service
+  name: octopusdemoservice
   namespace: octopusdemo
   labels:
-    app: octopusdemo
+    app: myoctopusapp
 spec:
   ports:
   - protocol: TCP
-    port: 8000
+    port: 80
+    targetPort: 8000
   selector:
-    app: octopusdemo
+    app: myoctopusapp
   type: LoadBalancer
   loadBalancerIP: ""

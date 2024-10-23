@@ -1,6 +1,37 @@
-<DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs Page</title>   
+
+    <style>
+        body {
+            background-color: lightgray; 
+        }
+
+        .reviews {
+            background-color: white; 
+            border-radius: 10px; /* Adjust the value for more or less rounded corners */
+            padding: 20px; 
+            margin: 20px auto; /* Center the box */
+            max-width: 800px; /* Optional: Limit the box width */
+        }
+    </style>
 </head>
 <body>
-	<p>Hello world</p>
+
+    <div class="reviews">
+        <h1>Reviews</h1>
+			<div id="review"></div>
+			<button hx-get="/review"
+				hx-trigger="click"
+				hx-target="#review"
+				hx-swap="innerHTML"
+			>
+			Click Me!
+			</button>
+        </div>
 </body>
+<script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+</html>
