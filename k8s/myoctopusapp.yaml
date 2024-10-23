@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: octopusdemo
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myoctopusapp
+  namespace: octopusdemo
+  labels:
+    app: myoctopusapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myoctopusapp
+  template:
+    metadata:
+      labels:
+        app: myoctopusapp
+    spec:
+      containers:
+      - name: app
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: octopusdemo-service
+  namespace: octopusdemo
+  labels:
+    app: octopusdemo
+spec:
+  ports:
+  - protocol: TCP
+    port: 8000
+  selector:
+    app: octopusdemo
+  type: LoadBalancer
+  loadBalancerIP: ""
